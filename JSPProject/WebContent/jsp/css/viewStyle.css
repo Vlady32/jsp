@@ -1,0 +1,21 @@
+body{
+	width: 100%;
+}
+
+table{
+	margin-top: 20px;
+	border-collapse: collapse;
+	width: 70%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+th, td{
+	padding: 3px;
+    border: 1px solid black;
+}
+
+th{
+	background: #b0e0e6;
+}
+

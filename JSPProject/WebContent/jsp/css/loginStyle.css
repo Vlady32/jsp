@@ -4,3 +4,7 @@ form {
 
 #sendButton{
 }
+
+.errors{
+	color: red;
+}

@@ -9,11 +9,11 @@
 		<form action="actionController" method="POST" name="LoginForm">
 			<input type="hidden" name="command" value="login">
 			<p>Sign in to PhoneBook</p>
-			<p>Login: <input type="text" name="login" value=""/>  </p>
-			<p>Password: <input type="password" name="password" value=""/>  </p>
-			<p>${errorLoginPassMessage }</p>
-			<p>${wrongAction }</p>
-			<p>${nullPage }</p>
+			<p>Login: <input type="text" name="login" value="" required/>  </p>
+			<p>Password: <input type="password" name="password" value="" required/>  </p>
+			<p class="errors">${errorLoginPassMessage }</p>
+			<p class="errors">${wrongAction }</p>
+			<p class="errors">${nullPage }</p>
 			<p><input id="sendButton" type="submit" value="Log in"> </p>
 		</form>
 		<form id="redirectForm" action="redirectController" method="POST" style="display:none">

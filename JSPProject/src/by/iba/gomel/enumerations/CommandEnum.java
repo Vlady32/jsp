@@ -4,12 +4,18 @@ import by.iba.gomel.commands.ForwardMainPageCommand;
 import by.iba.gomel.commands.LoginCommand;
 import by.iba.gomel.commands.LogoutCommand;
 import by.iba.gomel.commands.RegistrationCommand;
+import by.iba.gomel.commands.ViewCommand;
 import by.iba.gomel.interfaces.IActionCommand;
 
 public enum CommandEnum {
     LOGIN {
         {
             command = new LoginCommand();
+        }
+    },
+    VIEW {
+        {
+            command = new ViewCommand();
         }
     },
     FORWARDMAINPAGE {

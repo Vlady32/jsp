@@ -3,3 +3,22 @@
 	color: blue;
 	cursor: pointer;
 }
+
+.show{
+	display: block;
+}
+
+.showTable{
+	display: table;
+}
+
+.hide{
+	display: none;
+}
+
+.error{
+	color: red;
+	text-align: center;
+}
+
+

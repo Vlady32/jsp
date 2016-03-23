@@ -7,9 +7,9 @@
 		<form action="actionController" method="POST" name="RegistrationForm">
 			<input type="hidden" name="command" value="registration">
 			<p>Sign up to PhoneBook</p>
-			<p>Login: <input type="text" name="login" value=""/>  </p>
-			<p>Password: <input type="password" name="password" value=""/>  </p>
-			<p>Confirm password: <input type="password" name="confirmedPassword" value=""/>  </p>
+			<p>Login: <input type="text" name="login" value="" required/>  </p>
+			<p>Password: <input type="password" name="password" value="" required/>  </p>
+			<p>Confirm password: <input type="password" name="confirmedPassword" value="" required/>  </p>
 			<p>${errorLoginPassMessage }</p>
 			<p>${wrongAction }</p>
 			<p>${nullPage }</p>

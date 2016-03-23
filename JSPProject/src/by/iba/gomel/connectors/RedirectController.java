@@ -24,10 +24,23 @@ public class RedirectController extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+        System.err.println(request.getParameter("path"));
         if (request.getParameter("path").equals("registration")) {
             request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
         } else if (request.getParameter("path").equals("login")) {
             request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("view")) {
+            request.getRequestDispatcher("/jsp/view.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("search")) {
+            request.getRequestDispatcher("/jsp/search.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("add")) {
+            request.getRequestDispatcher("/jsp/add.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("edit")) {
+            request.getRequestDispatcher("/jsp/edit.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("delete")) {
+            request.getRequestDispatcher("/jsp/delete.jsp").forward(request, response);
+        } else if (request.getParameter("path").equals("control")) {
+            request.getRequestDispatcher("/jsp/control.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         }
