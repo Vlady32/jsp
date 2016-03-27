@@ -22,6 +22,7 @@ public class ViewLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginLogic.class);
     private static int          qualityRecords;
+    private static List<Record> listRecords;
 
     public static List<Record> extract(final int start) throws ViewException {
         Statement st = null;
@@ -45,6 +46,7 @@ public class ViewLogic {
                 listRecords.add(new Record(rs.getInt(1), rs.getString(2), rs.getString(3), rs
                         .getString(4), rs.getDate(5), rs.getString(6), rs.getDate(7)));
             }
+            ViewLogic.setListRecords(listRecords);
         } catch (final SQLException e) {
             ViewLogic.LOGGER.info("ExceptionViewLogic");
             ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
@@ -79,7 +81,11 @@ public class ViewLogic {
         return ViewLogic.qualityRecords;
     }
 
-    public static void setQualityRecords(final int qualityRecords) {
-        ViewLogic.qualityRecords = qualityRecords;
+    public static List<Record> getListRecords() {
+        return ViewLogic.listRecords;
+    }
+
+    public static void setListRecords(final List<Record> listRecords) {
+        ViewLogic.listRecords = listRecords;
     }
 }

@@ -3,11 +3,9 @@
 <html>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<head>
-		<title>Main page</title>
+		<title>View page</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/viewStyle.css" media="all">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/mainStyle.css" media="all">
-		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/jquery-2.2.2.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/main.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/view.js"></script>
 	</head>
 	<body>
 		<p class="error">${errorView}</p>
@@ -21,16 +19,17 @@
 			</tr>
 			<c:forEach var="el" items="${listRecords}" varStatus="status">
 				<tr>
-					<td><c:out value="${status.count + currentPosition}"/></td>
+					<td class="links items" data-item="${el.item}"><c:out value="${status.count + currentPosition}"/></td>
 					<td><c:out value="${el.fullName}"/></td>
 					<td><c:out value="${el.address}"/></td>
 					<td><c:out value="${el.phoneNumber}"/></td>
 				</tr>
+				
 			</c:forEach>
 		</table>
-		<div>
+		<div id="navPages">
 			<c:forEach var="pages" begin="1" end="${qualityPages}">
-				<a class="links pages">${pages}</a>
+				<a class="${ ((currentPosition+30)/30) == pages*1.0 ? '' : 'links'} pages">${pages}</a>
 			</c:forEach>
 		</div>
 	</body>

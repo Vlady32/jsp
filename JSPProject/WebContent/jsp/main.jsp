@@ -6,7 +6,7 @@
 		<title>Main page</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/mainStyle.css" media="all">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/mainPageStyle.css" media="all">
-		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/jquery-2.2.2.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/libs/jquery-2.2.2.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/main.js"></script>
 	</head>
 	<body>
@@ -25,12 +25,11 @@
 					<p><a class="links view">Просмотр справочника</a></p>
 					<p><a class="links" id="add">Добавление записей</a></p>
 					<p><a class="links" id="edit">Редактирование записей</a></p>
-					<p><a class="links" id="delete">Удаление записей</a></p>
 					<p><a class="links search">Поиск записей</a></p>
 					<p><a class="links" id="control">Управление списком пользователей</a></p>
 				</div>
 			</nav>
-			<div id="workplace">Workplace</div>
+			<div id="workplace">Рабочая область</div>
 		</div>
 		<hr id="afterContent">
 		<footer>Footer</footer>

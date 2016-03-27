@@ -1,9 +1,7 @@
 $(document).ready(function(){
 	
-	var currentPage = 1;
-	
-	function getCurrentPage() {
-		return currentPage;
+	function addClassLinks() {
+		$("nav a").not(".links").addClass("links");
 	}
 	
 	$("#logOut").click(function() {
@@ -18,49 +16,54 @@ $(document).ready(function(){
 	});
 	
 	$(".view").click(function() {
-		$.ajax({  
+		addClassLinks();
+		$(this).removeClass("links");
+		console.log("ajax view");
+		$.ajax({ 
 			type: "POST",
-	        url: "actionController", 
-	        data: {command: 'view', start: '0'},
-	        success: function(html){ 
-	        	$("#workplace").html(html);
-	        }
-	    });
-	});
-	
-	$(".pages").click(function() {
-		console.log(function () {
-			if (currentPage != $(this).text()){
-				currentPage = $(this).text();
+			url: "actionController",
+			data: {command: 'view', start: '0'},
+			success: function(html){ 
+				$("#workplace").html(html);
 			}
 		});
-		$.ajax({  
-			type: "POST",
-	        url: "actionController", 
-	        data: {command: 'view', start: (($(this).text()-1)*30)},
-	        success: function(html){ 
-	        	$("#workplace").html(html);
-	        }
-	    });
 	});
 	
 	$("#add").click(function() {
+		addClassLinks();
+		$(this).removeClass("links");
 		sendAjax("add");
 	});
 	
 	$("#edit").click(function() {
-		sendAjax("edit");
+		addClassLinks();
+		$(this).removeClass("links");
+		console.log("ajax edit");
+		$.ajax({ 
+			type: "POST",
+			url: "actionController",
+			data: {command: 'edit', start: '0'},
+			success: function(html){ 
+				$("#workplace").html(html);
+			}
+		});
 	});
 	
 	$("#delete").click(function() {
+		addClassLinks();
+		$(this).removeClass("links");
 		sendAjax("delete")
 	});
 	
 	$(".search").click(function() {
+		addClassLinks();
+		$(this).removeClass("links");
 		sendAjax("search");
 	});
 	
 	$("#control").click(function() {
+		addClassLinks();
+		$(this).removeClass("links");
 		sendAjax("control")
 	});
 	

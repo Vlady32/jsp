@@ -13,7 +13,7 @@
       <location>/jsp/error.jsp</location>
     </error-page>
     <session-config>
-      <session-timeout>1</session-timeout>
+      <session-timeout>10</session-timeout>
     </session-config>
     <context-param>
       <param-name>DBproperty</param-name>

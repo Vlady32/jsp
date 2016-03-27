@@ -1,8 +1,14 @@
 package by.iba.gomel.enumerations;
 
+import by.iba.gomel.commands.AddCommand;
+import by.iba.gomel.commands.ChangeCommand;
+import by.iba.gomel.commands.DeleteCommand;
+import by.iba.gomel.commands.EditCommand;
+import by.iba.gomel.commands.EditProfileCommand;
 import by.iba.gomel.commands.ForwardMainPageCommand;
 import by.iba.gomel.commands.LoginCommand;
 import by.iba.gomel.commands.LogoutCommand;
+import by.iba.gomel.commands.ProfileCommand;
 import by.iba.gomel.commands.RegistrationCommand;
 import by.iba.gomel.commands.ViewCommand;
 import by.iba.gomel.interfaces.IActionCommand;
@@ -18,6 +24,26 @@ public enum CommandEnum {
             command = new ViewCommand();
         }
     },
+    ADD {
+        {
+            command = new AddCommand();
+        }
+    },
+    EDIT {
+        {
+            command = new EditCommand();
+        }
+    },
+    EDIT_PROFILE {
+        {
+            command = new ChangeCommand();
+        }
+    },
+    EDIT_BD_PROFILE {
+        {
+            command = new EditProfileCommand();
+        }
+    },
     FORWARDMAINPAGE {
         {
             command = new ForwardMainPageCommand();
@@ -26,6 +52,16 @@ public enum CommandEnum {
     LOGOUT {
         {
             command = new LogoutCommand();
+        }
+    },
+    PROFILE {
+        {
+            command = new ProfileCommand();
+        }
+    },
+    DELETE {
+        {
+            command = new DeleteCommand();
         }
     },
     REGISTRATION {

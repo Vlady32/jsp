@@ -7,13 +7,16 @@ import java.util.Date;
  */
 public class Record {
 
-    private final int    item;
-    private final String fullName;
-    private final String address;
-    private final String phoneNumber;
-    private final Date   creationDate;
-    private final String mail;
-    private final Date   birthDate;
+    private int    item         = -1;
+    private String fullName     = null;
+    private String address      = null;
+    private String phoneNumber  = null;
+    private Date   creationDate = null;
+    private String mail         = null;
+    private Date   birthDate    = null; ;
+
+    public Record() {
+    }
 
     public Record(final int item, final String fullName, final String address,
             final String phoneNumber, final Date creationDate, final String mail,
@@ -25,6 +28,10 @@ public class Record {
         this.creationDate = creationDate;
         this.mail = mail;
         this.birthDate = birthDate;
+    }
+
+    public void setItem(final int item) {
+        this.item = item;
     }
 
     public int getItem() {
@@ -53,6 +60,37 @@ public class Record {
 
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    public void setFullName(final String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setAddress(final String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(final String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCreationDate(final Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setMail(final String mail) {
+        this.mail = mail;
+    }
+
+    public void setBirthDate(final Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Record [item=" + item + ", fullName=" + fullName + ", address=" + address
+                + ", phoneNumber=" + phoneNumber + ", creationDate=" + creationDate + ", mail="
+                + mail + ", birthDate=" + birthDate + "]";
     }
 
 }

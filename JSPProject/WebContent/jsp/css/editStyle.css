@@ -19,4 +19,20 @@ th{
 	background: #b0e0e6;
 }
 
+.withoutBorder{
+	border: none;
+}
+
+.editIcon{
+	color: blue;
+}
+
+.removeIcon{
+	color: red;
+}
+
+.editIcon:hover, .removeIcon:hover {
+	cursor: pointer;
+}
+
 

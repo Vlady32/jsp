@@ -1,0 +1,13 @@
+h3{
+	text-align: center;
+}
+
+#photo{
+	float: left;
+	margin-right: 20px;
+}
+
+#info{
+	float: left;
+}
+

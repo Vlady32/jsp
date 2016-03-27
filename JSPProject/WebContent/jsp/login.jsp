@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/mainStyle.css" media="all">
 	</head>
 	<body>
-		<form action="actionController" method="POST" name="LoginForm">
+		<form action="${pageContext.request.contextPath}/actionController" method="POST" name="LoginForm">
 			<input type="hidden" name="command" value="login">
 			<p>Sign in to PhoneBook</p>
 			<p>Login: <input type="text" name="login" value="" required/>  </p>

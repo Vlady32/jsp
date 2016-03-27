@@ -1,6 +1,7 @@
 package by.iba.gomel.connectors;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,6 +40,14 @@ public class ActionController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding(Constants.ENCODING_UTF_8);
         final SessionRequest requestContent = new SessionRequest(request);
+        final Enumeration<String> en = requestContent.getRequest().getParameterNames();
+        System.err.print("Attributes: ");
+        while (en.hasMoreElements()) {
+            System.err.print(en.nextElement() + " ");
+        }
+        System.err.print("\n");
+        System.err.println(requestContent.extractCommand() + " " + request.getContextPath() + " "
+                + request.getServletPath() + " " + request.getPathInfo());
         String page = null;
         final ActionFactory client = new ActionFactory();
         final IActionCommand command = client.defineCommand(requestContent);
@@ -47,12 +56,13 @@ public class ActionController extends HttpServlet {
         if (page != null) {
             final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(requestContent.getRequest(), response);
+
         } else {
+            System.err.println("else action controller");
             page = ConfigurationManager.getProperty(Constants.PROPERTY_PATH_INDEX_PAGE);
             requestContent.insertAttribute(Constants.PARAMETER_NULL_PAGE,
                     MessageManager.getProperty(Constants.MESSAGE_NULL_PAGE));
             response.sendRedirect(requestContent.getRequest().getContextPath() + page);
         }
     }
-
 }

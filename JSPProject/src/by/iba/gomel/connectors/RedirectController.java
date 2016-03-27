@@ -24,7 +24,6 @@ public class RedirectController extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-        System.err.println(request.getParameter("path"));
         if (request.getParameter("path").equals("registration")) {
             request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
         } else if (request.getParameter("path").equals("login")) {
@@ -37,8 +36,6 @@ public class RedirectController extends HttpServlet {
             request.getRequestDispatcher("/jsp/add.jsp").forward(request, response);
         } else if (request.getParameter("path").equals("edit")) {
             request.getRequestDispatcher("/jsp/edit.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("delete")) {
-            request.getRequestDispatcher("/jsp/delete.jsp").forward(request, response);
         } else if (request.getParameter("path").equals("control")) {
             request.getRequestDispatcher("/jsp/control.jsp").forward(request, response);
         } else {
