@@ -62,9 +62,17 @@ $(document).ready(function(){
 	});
 	
 	$("#control").click(function() {
+		console.log("control page")
 		addClassLinks();
 		$(this).removeClass("links");
-		sendAjax("control")
+		$.ajax({ 
+			type: "POST",
+			url: "actionController",
+			data: {command: 'control', start: '0'},
+			success: function(html){ 
+				$("#workplace").html(html);
+			}
+		});
 	});
 	
 });

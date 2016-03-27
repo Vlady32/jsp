@@ -23,7 +23,7 @@
 			<p><input type="submit" value="Искать"></p>
 		</form>
 		${errorView}
-		<table class="${not empty errorView && listRecords.size() > 0 ? 'showTable' : 'hide'}">
+		<table class="${empty errorView && listRecords.size() > 0 ? 'showTable' : 'hide'}">
 			<caption>Телефонный справочник</caption>
 			<tr>
 				<th>№ п/п</th>

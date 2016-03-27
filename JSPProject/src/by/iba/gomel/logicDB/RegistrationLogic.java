@@ -12,6 +12,9 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.connectionDB.ConnectionDB2;
 import by.iba.gomel.exceptions.DuplicateLoginException;
 
+/**
+ * This logic class uses for registration user in db.
+ */
 public class RegistrationLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
@@ -25,11 +28,10 @@ public class RegistrationLogic {
         try {
             cn = ConnectionDB2.getConnection();
             st = cn.createStatement();
-            final String ADD_OBJECTS = "INSERT INTO VLADY.\"Users\" (\"UserName\", \"Password\", \"Type\") VALUES (?,?,?)";
-            pr = cn.prepareStatement(ADD_OBJECTS);
-            pr.setString(1, userName);
-            pr.setString(2, password);
-            pr.setString(3, type);
+            pr = cn.prepareStatement(Constants.REQUEST_DB_REGISTRATION_USER);
+            pr.setString(Constants.INDEX_COLUMN_FULLNAME_SQL, userName);
+            pr.setString(Constants.INDEX_COLUMN_PASSWORD_SQL, password);
+            pr.setString(Constants.INDEX_COLUMN_TYPE_USER_SQL, type);
             pr.executeUpdate();
         } catch (final SQLException e) {
             RegistrationLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);

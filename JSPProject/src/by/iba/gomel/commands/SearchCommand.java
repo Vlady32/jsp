@@ -11,27 +11,22 @@ import by.iba.gomel.logicDB.SearchLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
+/**
+ * This class implements interface IActionCommand and realizes method execute. This class uses for
+ * searching record from db.
+ */
 public class SearchCommand implements IActionCommand {
 
     @Override
     public String execute(final SessionRequest request) {
-        System.err.println("here");
-        final String type = (String) request.getSession().getAttribute(
-                Constants.ATTRIBUTE_NAME_TYPE);
-        if ((type == null) || type.equals("guest") || type.equals("")) {
-            System.err.println("Type=null");
-            request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
-                    MessageManager.getProperty(Constants.MESSAGE_WRONG_VIEW));
+        if (request.isUser()) {
             return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE);
         }
-        final String searchPhrase = request.getRequest().getParameter("phraseSearch");
-        final String category = request.getRequest().getParameter("category");
-        System.err.println(searchPhrase + " " + category);
-
+        final String searchPhrase = request.getRequest().getParameter(
+                Constants.PARAMETER_PHRASE_SEARCH);
+        final String category = request.getRequest().getParameter(Constants.PARAMETER_CATEGORY);
         try {
-            final List<Record> listRecords = SearchLogic.extract(
-                    request.getRequest().getParameter("phraseSearch"), request.getRequest()
-                            .getParameter("category"));
+            final List<Record> listRecords = SearchLogic.extract(searchPhrase, category);
             if (listRecords.size() > 0) {
                 request.getRequest().setAttribute(Constants.ATTRIBUTE_NAME_LIST_RECORDS,
                         listRecords);
@@ -39,6 +34,8 @@ public class SearchCommand implements IActionCommand {
                 request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
                         MessageManager.getProperty(Constants.MESSAGE_EMPTY_VIEW));
             }
+            request.getRequest().setAttribute(Constants.PARAMETER_PHRASE_SEARCH, searchPhrase);
+            Record.setListRecords(listRecords);
         } catch (final ViewException e) {
             request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
                     MessageManager.getProperty(Constants.MESSAGE_WRONG_VIEW));

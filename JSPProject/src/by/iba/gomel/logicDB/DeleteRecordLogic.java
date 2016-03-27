@@ -11,7 +11,10 @@ import org.slf4j.LoggerFactory;
 import by.iba.gomel.Constants;
 import by.iba.gomel.connectionDB.ConnectionDB2;
 
-public class DeleteLogic {
+/**
+ * This logic class uses for deleting record from db.
+ */
+public class DeleteRecordLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
 
@@ -22,12 +25,11 @@ public class DeleteLogic {
         try {
             cn = ConnectionDB2.getConnection();
             st = cn.createStatement();
-            final String DELETE_RECORD = "DELETE FROM VLADY.\"PhoneBook\" WHERE VLADY.\"PhoneBook\".\"item\"=?";
-            pr = cn.prepareStatement(DELETE_RECORD);
-            pr.setInt(1, item);
+            pr = cn.prepareStatement(Constants.REQUEST_DB_DELETE_RECORD);
+            pr.setInt(Constants.INDEX_COLUMN_FULLNAME_SQL, item);
             pr.executeUpdate();
         } catch (final SQLException e) {
-            DeleteLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
+            DeleteRecordLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
             return false;
         } finally {
             if (cn != null) {

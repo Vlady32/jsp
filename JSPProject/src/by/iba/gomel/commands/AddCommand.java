@@ -15,7 +15,8 @@ import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
 /**
- * This class implements inerface IActionCommand and realizes method execute.
+ * This class implements interface IActionCommand and realizes method execute. This class uses for
+ * adding data from request and sends to addLogic.
  */
 public class AddCommand implements IActionCommand {
 
@@ -23,23 +24,19 @@ public class AddCommand implements IActionCommand {
 
     @Override
     public String execute(final SessionRequest request) {
-        final String type = (String) request.getSession().getAttribute(
-                Constants.ATTRIBUTE_NAME_TYPE);
-        if ((type == null) || type.equals("guest") || type.equals("")) {
-            System.err.println("Type=null");
-            request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
-                    MessageManager.getProperty(Constants.MESSAGE_WRONG_VIEW));
+        if (request.isUser()) {
             return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE);
         }
         final SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("yyyy-MM-dd");
+        format.applyPattern(Constants.DATE_PATTERN);
         final Record addedRecord = new Record();
-        addedRecord.setFullName(getParameter(request, "fullName"));
-        addedRecord.setAddress(getParameter(request, "address"));
-        addedRecord.setPhoneNumber(getParameter(request, "phoneNumber"));
-        addedRecord.setMail(getParameter(request, "mail"));
+        addedRecord.setFullName(getParameter(request, Constants.PARAMETER_FULL_NAME));
+        addedRecord.setAddress(getParameter(request, Constants.PARAMETER_ADDRESS));
+        addedRecord.setPhoneNumber(getParameter(request, Constants.PARAMETER_ADDRESS));
+        addedRecord.setMail(getParameter(request, Constants.PARAMETER_MAIL));
         try {
-            addedRecord.setBirthDate(format.parse(getParameter(request, "birthDate")));
+            addedRecord.setBirthDate(format.parse(getParameter(request,
+                    Constants.PARAMETER_BIRTH_DATE)));
         } catch (final ParseException e) {
             AddCommand.LOGGER.error(Constants.PARSE_EXCEPTION, e);
         }

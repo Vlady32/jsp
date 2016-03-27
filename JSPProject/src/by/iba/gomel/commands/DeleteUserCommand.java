@@ -3,32 +3,31 @@ package by.iba.gomel.commands;
 import by.iba.gomel.Constants;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.DeleteRecordLogic;
+import by.iba.gomel.logicDB.DeleteUserLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
 /**
  * This class implements interface IActionCommand and realizes method execute. This class uses for
- * deleting records from db.
+ * deleting user from db.
  */
-public class DeleteCommand implements IActionCommand {
+public class DeleteUserCommand implements IActionCommand {
 
     @Override
     public String execute(final SessionRequest request) {
         if (request.isUser()) {
             return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE);
         }
-        final int item = Integer.parseInt(request.getRequest().getParameter(
-                Constants.PARAMETER_ITEM));
-        if (DeleteRecordLogic.deleteRecord(item)) {
-            new ViewCommand().execute(request);
+        final String userName = request.getRequest().getParameter(Constants.PARAMETER_USER_NAME);
+        if (DeleteUserLogic.deleteUser(userName)) {
+            new ControlCommand().execute(request);
             request.getRequest().setAttribute(Constants.MESSAGE_SUCCESS_VIEW,
                     MessageManager.getProperty(Constants.MESSAGE_DELETING_SUCCESS));
         } else {
             request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
                     MessageManager.getProperty(Constants.MESSAGE_DELETING_ERROR));
         }
-        return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_EDIT_PAGE);
+        return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_CONTROL_PAGE);
     }
 
 }

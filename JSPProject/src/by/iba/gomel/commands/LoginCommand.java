@@ -8,7 +8,8 @@ import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
 /**
- * This class implements interface IActionCommand and realizes method execute.
+ * This class implements interface IActionCommand and realizes method execute. This class uses for
+ * logging user in application.
  */
 public class LoginCommand implements IActionCommand {
 

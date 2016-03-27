@@ -5,7 +5,7 @@ body{
 table{
 	margin-top: 20px;
 	border-collapse: collapse;
-	width: 90%;
+	width: 70%;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -17,4 +17,16 @@ th, td{
 
 th{
 	background: #b0e0e6;
+}
+
+.withoutBorder{
+	border: none;
+}
+
+.removeIcon{
+	color: red;
+}
+
+.removeIcon:hover {
+	cursor: pointer;
 }

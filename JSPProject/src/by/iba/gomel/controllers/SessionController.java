@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.iba.gomel.Constants;
+import by.iba.gomel.managers.ConfigurationManager;
 
 /**
- * Servlet implementation class SessionController
+ * This servlet uses for checking session between client and server.
  */
 @WebServlet("/SessionController")
 public class SessionController extends HttpServlet {
@@ -29,10 +30,13 @@ public class SessionController extends HttpServlet {
             throws ServletException, IOException {
         final HttpSession session = request.getSession();
         if (session.getAttribute(Constants.ATTRIBUTE_NAME_LOGIN) == null) {
-            request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE)).forward(
+                    request, response);
         } else {
-            request.setAttribute("command", "forwardmainpage");
-            request.getRequestDispatcher("/actionController").forward(request, response);
+            request.setAttribute(Constants.PARAMETER_COMMAND, Constants.PARAMETER_FORWARD_MAIN_PAGE);
+            request.getRequestDispatcher(Constants.PATH_VALUE_ACTION_CONTROLLER).forward(request,
+                    response);
         }
 
     }

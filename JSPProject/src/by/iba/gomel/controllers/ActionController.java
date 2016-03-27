@@ -1,7 +1,6 @@
 package by.iba.gomel.controllers;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
 /**
- * This servlet process all commands from pages.
+ * This servlet processes all commands from application's pages.
  */
 @WebServlet("/actionController")
 public class ActionController extends HttpServlet {
@@ -36,22 +35,24 @@ public class ActionController extends HttpServlet {
         processRequest(req, resp);
     }
 
+    /**
+     * 
+     * @param request
+     *            request from client
+     * @param response
+     *            response.
+     * @throws ServletException
+     *             exception servlet.
+     * @throws IOException
+     *             ioexception.
+     */
     private void processRequest(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding(Constants.ENCODING_UTF_8);
         final SessionRequest requestContent = new SessionRequest(request);
-        final Enumeration<String> en = requestContent.getRequest().getParameterNames();
-        System.err.print("Attributes: ");
-        while (en.hasMoreElements()) {
-            System.err.print(en.nextElement() + " ");
-        }
-        System.err.println("\n");
-        System.err.println(requestContent.extractCommand() + " " + request.getContextPath() + " "
-                + request.getServletPath() + " " + request.getPathInfo());
         String page = null;
         final ActionFactory client = new ActionFactory();
         final IActionCommand command = client.defineCommand(requestContent);
-        // call method execute
         page = command.execute(requestContent);
         if (page != null) {
             final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);

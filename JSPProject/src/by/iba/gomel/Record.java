@@ -1,23 +1,50 @@
 package by.iba.gomel;
 
 import java.util.Date;
+import java.util.List;
 
 /**
- * This class contains
+ * This class contains fields and methods for working with records.
  */
 public class Record {
 
-    private int    item         = -1;
-    private String fullName     = null;
-    private String address      = null;
-    private String phoneNumber  = null;
-    private Date   creationDate = null;
-    private String mail         = null;
-    private Date   birthDate    = null; ;
+    private int                 item         = Constants.DEFAULT_INDEX_ITEM;
+    private String              fullName     = null;
+    private String              address      = null;
+    private String              phoneNumber  = null;
+    private Date                creationDate = null;
+    private String              mail         = null;
+    private Date                birthDate    = null;
+    private static List<Record> listRecords;
+
+    public static List<Record> getListRecords() {
+        return Record.listRecords;
+    }
+
+    public static void setListRecords(final List<Record> listRecords) {
+        Record.listRecords = listRecords;
+    }
 
     public Record() {
     }
 
+    /**
+     * 
+     * @param item
+     *            key record.
+     * @param fullName
+     *            full name.
+     * @param address
+     *            address.
+     * @param phoneNumber
+     *            phone number.
+     * @param creationDate
+     *            date of creation.
+     * @param mail
+     *            mail.
+     * @param birthDate
+     *            birthday date.
+     */
     public Record(final int item, final String fullName, final String address,
             final String phoneNumber, final Date creationDate, final String mail,
             final Date birthDate) {
@@ -84,13 +111,6 @@ public class Record {
 
     public void setBirthDate(final Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Record [item=" + item + ", fullName=" + fullName + ", address=" + address
-                + ", phoneNumber=" + phoneNumber + ", creationDate=" + creationDate + ", mail="
-                + mail + ", birthDate=" + birthDate + "]";
     }
 
 }

@@ -11,6 +11,10 @@ import by.iba.gomel.logicDB.RegistrationLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
+/**
+ * This class implements interface IActionCommand and realizes method execute. This class uses for
+ * registration user in application.
+ */
 public class RegistrationCommand implements IActionCommand {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationCommand.class);
@@ -24,7 +28,6 @@ public class RegistrationCommand implements IActionCommand {
         final String confirmedPassword = request.getRequest().getParameter(
                 Constants.PARAMETER_NAME_CONFIRMED_PASSWORD);
         final String typeUser = Constants.TYPE_USER;
-
         if (password.equals(confirmedPassword)) {
             try {
                 RegistrationLogic.AddToDB(login, password, typeUser);

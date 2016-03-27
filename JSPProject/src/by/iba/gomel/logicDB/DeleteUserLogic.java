@@ -1,7 +1,7 @@
 package by.iba.gomel.logicDB;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,28 +12,25 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.connectionDB.ConnectionDB2;
 
 /**
- * This class contains method checkUser that to check login and password according to database.
+ * This logic class uses for deleting user from db.
  */
-public class LoginLogic {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginLogic.class);
+public class DeleteUserLogic {
 
-    public static String checkUser(final String enterLogin, final String enterPassword) {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
+
+    public static boolean deleteUser(final String userName) {
         Statement st = null;
-        ResultSet rs = null;
+        PreparedStatement pr = null;
         Connection cn = null;
-        String result = null;
         try {
             cn = ConnectionDB2.getConnection();
             st = cn.createStatement();
-            final String checkingRequest = Constants.REQUEST_DB_CHECK_USER_FIRST_PART + enterLogin
-                    + Constants.REQUEST_DB_CHECK_USER_SECOND_PART + enterPassword
-                    + Constants.REQUEST_DB_CHECK_USER_THIRD_PART;
-            rs = st.executeQuery(checkingRequest);
-            if (rs.next()) {
-                result = rs.getString(Constants.INDEX_COLUMN_TYPE_SQL);
-            }
+            pr = cn.prepareStatement(Constants.REQUEST_DB_DELETE_USER);
+            pr.setString(Constants.INDEX_COLUMN_FULLNAME_SQL, userName);
+            pr.executeUpdate();
         } catch (final SQLException e) {
-            LoginLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
+            DeleteUserLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
+            return false;
         } finally {
             if (cn != null) {
                 try {
@@ -49,14 +46,14 @@ public class LoginLogic {
                     e.printStackTrace();
                 }
             }
-            if (rs != null) {
+            if (pr != null) {
                 try {
-                    rs.close();
+                    pr.close();
                 } catch (final SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return result;
+        return true;
     }
 }

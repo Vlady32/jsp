@@ -12,6 +12,9 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
 import by.iba.gomel.connectionDB.ConnectionDB2;
 
+/**
+ * This logic class uses for editing record in db.
+ */
 public class EditLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
@@ -23,14 +26,14 @@ public class EditLogic {
         try {
             cn = ConnectionDB2.getConnection();
             st = cn.createStatement();
-            final String EDIT_RECORD = "UPDATE VLADY.\"PhoneBook\" SET \"fullName\"=?, \"address\"=?, \"phoneNumber\"=?, \"mail\"=?, \"birthDate\"=? WHERE VLADY.\"PhoneBook\".\"item\"=?";
-            pr = cn.prepareStatement(EDIT_RECORD);
-            pr.setString(1, record.getFullName());
-            pr.setString(2, record.getAddress());
-            pr.setString(3, record.getPhoneNumber());
-            pr.setString(4, record.getMail());
-            pr.setDate(5, new java.sql.Date(record.getBirthDate().getTime()));
-            pr.setInt(6, record.getItem());
+            pr = cn.prepareStatement(Constants.REQUEST_DB_EDIT_RECORD);
+            pr.setString(Constants.INDEX_COLUMN_FULLNAME_SQL, record.getFullName());
+            pr.setString(Constants.INDEX_COLUMN_ADDRESS_SQL, record.getAddress());
+            pr.setString(Constants.INDEX_COLUMN_PHONE_NUMBER_SQL, record.getPhoneNumber());
+            pr.setString(Constants.INDEX_COLUMN_MAIL_SQL, record.getMail());
+            pr.setDate(Constants.INDEX_COLUMN_DATE_SQL, new java.sql.Date(record.getBirthDate()
+                    .getTime()));
+            pr.setInt(Constants.INDEX_COLUMN_ITEM_SQL, record.getItem());
             pr.executeUpdate();
         } catch (final SQLException e) {
             EditLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);

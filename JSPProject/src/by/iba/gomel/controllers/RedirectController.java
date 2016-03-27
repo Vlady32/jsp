@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import by.iba.gomel.Constants;
+import by.iba.gomel.managers.ConfigurationManager;
+
 /**
- * Servlet implementation class RedirectController
+ * This servlet processes different redirections.
  */
 @WebServlet("/redirectController")
 public class RedirectController extends HttpServlet {
@@ -24,22 +27,33 @@ public class RedirectController extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("path").equals("registration")) {
-            request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("login")) {
-            request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("view")) {
-            request.getRequestDispatcher("/jsp/view.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("search")) {
-            request.getRequestDispatcher("/jsp/search.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("add")) {
-            request.getRequestDispatcher("/jsp/add.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("edit")) {
-            request.getRequestDispatcher("/jsp/edit.jsp").forward(request, response);
-        } else if (request.getParameter("path").equals("control")) {
-            request.getRequestDispatcher("/jsp/control.jsp").forward(request, response);
+        if (request.getParameter(Constants.PARAMETER_PATH)
+                .equals(Constants.PATH_VALUE_REGISTRATION)) {
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_REGISTRATION_PAGE))
+                    .forward(request, response);
+        } else if (request.getParameter(Constants.PARAMETER_PATH)
+                .equals(Constants.PATH_VALUE_LOGIN)) {
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE)).forward(
+                    request, response);
+        } else if (request.getParameter(Constants.PARAMETER_PATH).equals(
+                Constants.PATH_VALUE_SEARCH)) {
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_SEARCH_PAGE)).forward(
+                    request, response);
+        } else if (request.getParameter(Constants.PARAMETER_PATH).equals(Constants.PATH_VALUE_ADD)) {
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_ADD_PAGE)).forward(
+                    request, response);
+        } else if (request.getParameter(Constants.PARAMETER_PATH).equals(Constants.PATH_VALUE_EDIT)) {
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_EDIT_PAGE)).forward(
+                    request, response);
         } else {
-            request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+            request.getRequestDispatcher(
+                    ConfigurationManager.getProperty(Constants.PROPERTY_PATH_INDEX_PAGE)).forward(
+                    request, response);
         }
     }
 

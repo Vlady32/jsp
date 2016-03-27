@@ -24,6 +24,14 @@ public class ViewLogic {
     private static int          qualityRecords;
     private static List<Record> listRecords;
 
+    /**
+     * 
+     * @param start
+     *            position.
+     * @return list of records.
+     * @throws ViewException
+     *             exception database.
+     */
     public static List<Record> extract(final int start) throws ViewException {
         Statement st = null;
         ResultSet rs = null;
@@ -33,20 +41,20 @@ public class ViewLogic {
             cn = ConnectionDB2.getConnection();
             listRecords = new ArrayList<Record>();
             st = cn.createStatement();
-            final String request = "SELECT \"item\",\"fullName\",\"address\",\"phoneNumber\",\"creationDate\",\"mail\",\"birthDate\"  FROM VLADY.\"PhoneBook\" LIMIT "
-                    + start + ",30 ";
-            final String qualityRequest = "SELECT COUNT(*) FROM VLADY.\"PhoneBook\"";
+            final String getAllRecordsRequest = Constants.REQUEST_DB_GET_ALL_RECORDS_FIRST_PART
+                    + start + Constants.REQUEST_DB_GET_ALL_RECORDS_SECOND_PART;
+            final String qualityRequest = Constants.REQUEST_DB_QUALITY_RECORDS;
             rs = st.executeQuery(qualityRequest);
             if (rs.next()) {
                 ViewLogic.qualityRecords = rs.getInt(1);
             }
             rs.close();
-            rs = st.executeQuery(request);
+            rs = st.executeQuery(getAllRecordsRequest);
             while (rs.next()) {
                 listRecords.add(new Record(rs.getInt(1), rs.getString(2), rs.getString(3), rs
                         .getString(4), rs.getDate(5), rs.getString(6), rs.getDate(7)));
             }
-            ViewLogic.setListRecords(listRecords);
+            Record.setListRecords(listRecords);
         } catch (final SQLException e) {
             ViewLogic.LOGGER.info("ExceptionViewLogic");
             ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);

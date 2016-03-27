@@ -2,7 +2,9 @@ package by.iba.gomel.enumerations;
 
 import by.iba.gomel.commands.AddCommand;
 import by.iba.gomel.commands.ChangeCommand;
+import by.iba.gomel.commands.ControlCommand;
 import by.iba.gomel.commands.DeleteCommand;
+import by.iba.gomel.commands.DeleteUserCommand;
 import by.iba.gomel.commands.EditCommand;
 import by.iba.gomel.commands.EditProfileCommand;
 import by.iba.gomel.commands.ForwardMainPageCommand;
@@ -14,6 +16,9 @@ import by.iba.gomel.commands.SearchCommand;
 import by.iba.gomel.commands.ViewCommand;
 import by.iba.gomel.interfaces.IActionCommand;
 
+/**
+ * This enumeration contains all command used by this application.
+ */
 public enum CommandEnum {
     LOGIN {
         {
@@ -68,6 +73,16 @@ public enum CommandEnum {
     DELETE {
         {
             command = new DeleteCommand();
+        }
+    },
+    DELETE_USER {
+        {
+            command = new DeleteUserCommand();
+        }
+    },
+    CONTROL {
+        {
+            command = new ControlCommand();
         }
     },
     REGISTRATION {
