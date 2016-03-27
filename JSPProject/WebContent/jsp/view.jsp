@@ -23,8 +23,7 @@
 					<td><c:out value="${el.fullName}"/></td>
 					<td><c:out value="${el.address}"/></td>
 					<td><c:out value="${el.phoneNumber}"/></td>
-				</tr>
-				
+				</tr>	
 			</c:forEach>
 		</table>
 		<div id="navPages">

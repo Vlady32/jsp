@@ -20,6 +20,7 @@ public class Constants {
 
     public static final String MESSAGE_WRONG_PROFILE                      = "message.errorProfile";
     public static final String MESSAGE_WRONG_VIEW                         = "message.wrongview";
+    public static final String MESSAGE_EMPTY_VIEW                         = "message.emptyview";
     public static final String MESSAGE_WRONG_ACTION                       = "message.wrongaction";
     public static final String MESSAGE_NULL_PAGE                          = "message.nullpage";
     public static final String MESSAGE_LOGIN_ERROR                        = "message.loginerror";
@@ -60,4 +61,5 @@ public class Constants {
     public static final String PROPERTY_PATH_PROFILE_PAGE                 = "path.page.profile";
     public static final String PROPERTY_PATH_ADD_PAGE                     = "path.page.add";
     public static final String PROPERTY_PATH_EDIT_PROFILE_PAGE            = "path.page.editprofile";
+    public static final String PROPERTY_PATH_SEARCH_PAGE                  = "path.page.search";
 }

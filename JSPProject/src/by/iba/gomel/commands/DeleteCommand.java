@@ -29,7 +29,6 @@ public class DeleteCommand implements IActionCommand {
                     MessageManager.getProperty(Constants.MESSAGE_DELETING_ERROR));
         }
         return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_EDIT_PAGE);
-
     }
 
 }

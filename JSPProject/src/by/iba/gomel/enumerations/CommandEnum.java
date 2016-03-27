@@ -10,6 +10,7 @@ import by.iba.gomel.commands.LoginCommand;
 import by.iba.gomel.commands.LogoutCommand;
 import by.iba.gomel.commands.ProfileCommand;
 import by.iba.gomel.commands.RegistrationCommand;
+import by.iba.gomel.commands.SearchCommand;
 import by.iba.gomel.commands.ViewCommand;
 import by.iba.gomel.interfaces.IActionCommand;
 
@@ -32,6 +33,11 @@ public enum CommandEnum {
     EDIT {
         {
             command = new EditCommand();
+        }
+    },
+    SEARCH {
+        {
+            command = new SearchCommand();
         }
     },
     EDIT_PROFILE {

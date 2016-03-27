@@ -9,9 +9,15 @@ import by.iba.gomel.managers.MessageManager;
 
 public class ActionFactory {
 
+    public ActionFactory() {
+        System.err.println("Constructor");
+    }
+
     public IActionCommand defineCommand(final SessionRequest request) {
+        System.err.println("HERE");
         IActionCommand current = new EmptyCommand();
         final String action = request.extractCommand();
+        System.err.println("\nAction command" + action);
         if ((action == null) || action.isEmpty()) {
             return current;
         }

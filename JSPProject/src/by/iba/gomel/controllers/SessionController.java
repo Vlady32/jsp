@@ -1,4 +1,4 @@
-package by.iba.gomel.connectors;
+package by.iba.gomel.controllers;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package by.iba.gomel.connectors;
+package by.iba.gomel.controllers;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -45,7 +45,7 @@ public class ActionController extends HttpServlet {
         while (en.hasMoreElements()) {
             System.err.print(en.nextElement() + " ");
         }
-        System.err.print("\n");
+        System.err.println("\n");
         System.err.println(requestContent.extractCommand() + " " + request.getContextPath() + " "
                 + request.getServletPath() + " " + request.getPathInfo());
         String page = null;
@@ -56,9 +56,7 @@ public class ActionController extends HttpServlet {
         if (page != null) {
             final RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(requestContent.getRequest(), response);
-
         } else {
-            System.err.println("else action controller");
             page = ConfigurationManager.getProperty(Constants.PROPERTY_PATH_INDEX_PAGE);
             requestContent.insertAttribute(Constants.PARAMETER_NULL_PAGE,
                     MessageManager.getProperty(Constants.MESSAGE_NULL_PAGE));
