@@ -1,7 +1,11 @@
 package by.iba.gomel;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
+
+import com.ibm.ws.util.Base64;
 
 /**
  * This class contains fields and methods for working with records.
@@ -15,14 +19,42 @@ public class Record {
     private Date                creationDate = null;
     private String              mail         = null;
     private Date                birthDate    = null;
+    private String              pathFile     = null;
+
     private static List<Record> listRecords;
 
     public static List<Record> getListRecords() {
         return Record.listRecords;
     }
 
+    private byte[] getByteFile(final String pathToFile) {
+        FileInputStream fileInputStream = null;
+        final File file = new File(pathToFile);
+        final byte[] bFile = new byte[(int) file.length()];
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+        return bFile;
+    }
+
+    public String getBase64Code() {
+        return Base64.encode(getByteFile(pathFile));
+    }
+
     public static void setListRecords(final List<Record> listRecords) {
         Record.listRecords = listRecords;
+    }
+
+    public String getPathFile() {
+        return pathFile;
+    }
+
+    public void setPathFile(final String pathFile) {
+        this.pathFile = pathFile;
     }
 
     public Record() {
@@ -47,7 +79,7 @@ public class Record {
      */
     public Record(final int item, final String fullName, final String address,
             final String phoneNumber, final Date creationDate, final String mail,
-            final Date birthDate) {
+            final Date birthDate, final String pathFile) {
         this.item = item;
         this.fullName = fullName;
         this.address = address;
@@ -55,6 +87,7 @@ public class Record {
         this.creationDate = creationDate;
         this.mail = mail;
         this.birthDate = birthDate;
+        this.pathFile = pathFile;
     }
 
     public void setItem(final int item) {

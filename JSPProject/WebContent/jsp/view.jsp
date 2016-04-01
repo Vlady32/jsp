@@ -4,13 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<head>
 		<title>View page</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/viewStyle.css" media="all">
 		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/view.js"></script>
 	</head>
 	<body>
 		<p class="error">${errorView}</p>
 		<table class="${errorView.trim() eq 'Downloading data error' ? 'hide' : 'showTable'}">
-		<caption>Телефонный справочник</caption>
 			<tr>
 				<th>№ п/п</th>
 				<th>Ф.И.О.</th>

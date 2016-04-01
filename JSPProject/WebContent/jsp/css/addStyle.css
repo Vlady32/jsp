@@ -5,3 +5,60 @@ body{
 #addPage{
 	margin-left: 30px;
 }
+
+.errors{
+	color: red;
+}
+
+#addPage {
+	position: absolute; 
+    width: 35%; 
+    height: 73%; 
+    left: 55%; 
+    top: 31%; 
+    margin-left: -14%; 
+    margin-top: -10%; 
+}
+
+.box{
+	background-color: #fff;
+	padding-left: 60px;
+	padding-top: 20px;
+	padding-right: -50px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+}
+
+#addPage input{
+    width: 80%;
+    height: 37px;
+    padding-left: 10px;
+    margin-bottom: 5px; 
+    font-size: 16px; 
+    border-top: 1px solid #e1e8ec;
+    border-right: 1px solid #eef2f5;
+    border-bottom: 1px solid #eef2f5;
+    border-left: 1px solid #e1e8ec;
+    border-radius: 4px;
+}
+
+#addPage input[type="file"]{
+	border: none;
+}
+
+#addRecord{
+    cursor: pointer;
+    color: #185e87;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    padding-left: 21px;
+    font-size: 18px;
+    padding-right: 21px;
+    text-shadow: 1px 1px 0 #c3e9f8;
+    background-color: #94dffc;
+}
+
+#addRecord:hover{
+    background-color: #5ecef9;
+}

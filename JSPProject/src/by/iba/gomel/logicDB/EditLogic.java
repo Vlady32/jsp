@@ -33,6 +33,7 @@ public class EditLogic {
             pr.setString(Constants.INDEX_COLUMN_MAIL_SQL, record.getMail());
             pr.setDate(Constants.INDEX_COLUMN_DATE_SQL, new java.sql.Date(record.getBirthDate()
                     .getTime()));
+            pr.setString(Constants.INDEX_COLUMN_IMAGE__SQL, record.getPathFile());
             pr.setInt(Constants.INDEX_COLUMN_ITEM_SQL, record.getItem());
             pr.executeUpdate();
         } catch (final SQLException e) {

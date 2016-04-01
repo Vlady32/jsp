@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 	$(".pages").click(function() {
-		console.log("ajax pages");
 		$.ajax({  
 			type: "POST",
 			url: "actionController", 
@@ -14,19 +13,22 @@ $(document).ready(function(){
 	
 	
 	$(".editIcon").click(function() {
-		console.log("Here");
 		$.ajax({  
 			type: "POST",
 	        url: "actionController", 
 	        data: {command: 'edit_profile', item: $(this).parent().attr("data-item")},
 	        success: function(html){ 
-	        	$("#workplace").html(html);
+//	        	$("#workplace").html(html);
+	        	$.fancybox(html, {
+          			autoSize: true,
+          			openEffect: 'none',
+          			closeEffect: 'none'
+        		});
 	        }
 	    });
 	})
 	
 	$(".removeIcon").click(function() {
-			console.log("Here1");
 			if (confirm("Вы действительно хотите удалить запись?")) {
 				$.ajax({  
 					type: "POST",

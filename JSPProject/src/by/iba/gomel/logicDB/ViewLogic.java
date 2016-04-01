@@ -46,13 +46,19 @@ public class ViewLogic {
             final String qualityRequest = Constants.REQUEST_DB_QUALITY_RECORDS;
             rs = st.executeQuery(qualityRequest);
             if (rs.next()) {
-                ViewLogic.qualityRecords = rs.getInt(1);
+                ViewLogic.qualityRecords = rs.getInt(Constants.INDEX_COLUMN_FULLNAME_SQL);
             }
             rs.close();
             rs = st.executeQuery(getAllRecordsRequest);
             while (rs.next()) {
-                listRecords.add(new Record(rs.getInt(1), rs.getString(2), rs.getString(3), rs
-                        .getString(4), rs.getDate(5), rs.getString(6), rs.getDate(7)));
+                listRecords.add(new Record(rs.getInt(Constants.INDEX_COLUMN_ITEM_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_FULLNAME_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_ADDRESS_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_PHONE_NUMER_VIEW_SQL), rs
+                        .getDate(Constants.INDEX_COLUMN_CREATION_DATE_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_MAIL_VIEW_SQL), rs
+                        .getDate(Constants.INDEX_COLUMN_BIRTHDATE_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_IMAGE_VIEW_SQL)));
             }
             Record.setListRecords(listRecords);
         } catch (final SQLException e) {

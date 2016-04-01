@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 	$(".pages").click(function() {
-		console.log("ajax pages");
 		$.ajax({  
 			type: "POST",
 			url: "actionController", 
@@ -13,7 +12,6 @@ $(document).ready(function(){
 	});
 	
 	$(".removeIcon").click(function() {
-			console.log("RemoveIcon");
 			if (confirm("Вы действительно хотите удалить запись?")) {
 				$.ajax({  
 					type: "POST",

@@ -9,5 +9,12 @@ h3{
 
 #info{
 	float: left;
+	margin-left: 50px;
 }
+
+.errors{
+	color: red;
+}
+
+
 

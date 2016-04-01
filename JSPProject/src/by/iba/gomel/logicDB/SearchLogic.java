@@ -50,8 +50,14 @@ public class SearchLogic {
                 rs = st.executeQuery(getRecordsCertainColumn);
             }
             while (rs.next()) {
-                listRecords.add(new Record(rs.getInt(1), rs.getString(2), rs.getString(3), rs
-                        .getString(4), rs.getDate(5), rs.getString(6), rs.getDate(7)));
+                listRecords.add(new Record(rs.getInt(Constants.INDEX_COLUMN_ITEM_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_FULLNAME_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_ADDRESS_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_PHONE_NUMER_VIEW_SQL), rs
+                        .getDate(Constants.INDEX_COLUMN_CREATION_DATE_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_MAIL_VIEW_SQL), rs
+                        .getDate(Constants.INDEX_COLUMN_BIRTHDATE_VIEW_SQL), rs
+                        .getString(Constants.INDEX_COLUMN_IMAGE_VIEW_SQL)));
             }
         } catch (final SQLException e) {
             SearchLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);

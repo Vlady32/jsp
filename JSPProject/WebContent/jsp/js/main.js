@@ -1,24 +1,12 @@
 $(document).ready(function(){
 	
-	function addClassLinks() {
-		$("nav a").not(".links").addClass("links");
+	function deleteClass() {
+		$("nav a").removeClass("active");
 	}
 	
-	$("#logOut").click(function() {
-		$.ajax({  
-			type: "POST",
-	        url: "actionController", 
-	        data: {command: 'logout'},
-	        success: function(html){ 
-	        	window.location.href = "jsp/login.jsp"; 
-	        }
-	    });
-	});
-	
 	$(".view").click(function() {
-		addClassLinks();
-		$(this).removeClass("links");
-		console.log("ajax view");
+		deleteClass();
+		$(this).addClass("active");
 		$.ajax({ 
 			type: "POST",
 			url: "actionController",
@@ -30,15 +18,14 @@ $(document).ready(function(){
 	});
 	
 	$("#add").click(function() {
-		addClassLinks();
-		$(this).removeClass("links");
+		deleteClass();
+		$(this).addClass("active");
 		sendAjax("add");
 	});
 	
 	$("#edit").click(function() {
-		addClassLinks();
-		$(this).removeClass("links");
-		console.log("ajax edit");
+		deleteClass();
+		$(this).addClass("active");
 		$.ajax({ 
 			type: "POST",
 			url: "actionController",
@@ -50,21 +37,20 @@ $(document).ready(function(){
 	});
 	
 	$("#delete").click(function() {
-		addClassLinks();
-		$(this).removeClass("links");
+		deleteClass();
+		$(this).addClass("active");
 		sendAjax("delete")
 	});
 	
 	$(".search").click(function() {
-		addClassLinks();
-		$(this).removeClass("links");
+		deleteClass();
+		$(this).addClass("active");
 		sendAjax("search");
 	});
 	
 	$("#control").click(function() {
-		console.log("control page")
-		addClassLinks();
-		$(this).removeClass("links");
+		deleteClass();
+		$(this).addClass("active");
 		$.ajax({ 
 			type: "POST",
 			url: "actionController",

@@ -1,19 +1,22 @@
 $(document).ready(function(){
 	
 	$(".items").click(function() {
-		console.log($(this).attr("data-item"));
 		$.ajax({  
 			type: "POST",
 	        url: "actionController", 
 	        data: {command: 'profile', item: $(this).attr("data-item")},
 	        success: function(html){ 
-	        	$("#workplace").html(html);
+	        	//$("#workplace").html(html);
+	        	$.fancybox(html, {
+          			autoSize: true,
+          			openEffect: 'none',
+          			closeEffect: 'none'
+        		});
 	        }
 	    });
 	});
 
 	$(".pages").click(function() {
-		console.log("ajax pages");
 		$.ajax({  
 			type: "POST",
 			url: "actionController", 

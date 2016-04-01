@@ -33,6 +33,7 @@ public class AdditionLogic {
             pr.setString(Constants.INDEX_COLUMN_MAIL_SQL, record.getMail());
             pr.setDate(Constants.INDEX_COLUMN_DATE_SQL, new java.sql.Date(record.getBirthDate()
                     .getTime()));
+            pr.setString(Constants.INDEX_COLUMN_IMAGE_SQL, record.getPathFile());
             pr.executeUpdate();
         } catch (final SQLException e) {
             AdditionLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);

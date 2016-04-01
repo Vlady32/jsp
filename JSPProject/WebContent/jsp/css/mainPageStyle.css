@@ -1,39 +1,121 @@
+html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 body{
 	width: 100%;
 	margin: 0;
+	padding: 0;
+	height: 100%;
+	background-color: #e1f0f7;
+}
+
+p{
+	font-family: "Tahoma";
 }
 
 header{
 	width: 100%;
-	text-align: center;
+	height:8%;
+	background-color: #5178A3;
+}
+
+header p {
+	float: left;
+	color: white;
+}
+
+header #firstP{
+	line-height: 9px;
+	font-size: 22px;
+	margin-left: 1%;
+}
+
+header #secondP{
+	margin-left: 20%;
+}
+
+header #thirdP{
+	float: right;
+	margin-right: 10px;
+}
+
+header .logOut{
+	cursor: pointer;
+	text-decoration: underline;
+	color: white;
 }
 
 #content{
+	clear:both;
 	width: 100%;
+	height: 92%;
+	min-height: 92%;
 }
 
 #content nav{
-	width: 29%;
+	width: 25%;
 	float: left;
-	border-right: 1px solid black;
+	height: 92%;
+	min-height: 92%;
+	background-color: #e1f0f7;
+}
+
+#content nav p{
+	line-height: 25px;
+}
+
+#content .itemsNav{
+	margin-left: 30px;
+}
+
+#content .itemsNav:hover{
+	/*margin-left: 30px;*/
+	cursor: pointer;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: white;
+}
+
+.active{
+	color: gold;
+	background-color: white;
+	padding: 10px;
+	border-radius: 3px;
 }
 
 #content #workplace{
-	width: 69%;
+	width: 74%;
 	float: left;
+	height: 92%;
+	min-height: 92%;
+	height: auto !important;
+	background-color: #F8FBFB;
+}
+
+#hfooter{
+	clear: both;
+    height: 49px;
 }
 
 footer{
-	width: 100%;
-}
-
-#logOut{
-	float: right;
-}
-
-#afterHeader, #afterContent{
 	clear: both;
+	width: 100%;
+	background-color: #E7EBED;
+	height: 49px;
+	margin-top: -49px;
+	text-align: center;
 }
+
+footer span{
+	display: inline-block;
+	margin-top: 15px;
+	text-align: center;
+	font-size: 18px;
+}
+
 
 
 

@@ -4,6 +4,9 @@
 		<title>Addition successful page</title>
 	</head>
 	<body>
-		<h3 style="text-align: center;">You have successfully added record!</h3>
+		<div style="width: 100px">
+			<h3 style="text-align: center;">Запись была успешно добавлена!</h3>
+		</div>
+		
 	</body>
 </html>

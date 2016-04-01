@@ -22,10 +22,10 @@ public class DeleteUserCommand implements IActionCommand {
         if (DeleteUserLogic.deleteUser(userName)) {
             new ControlCommand().execute(request);
             request.getRequest().setAttribute(Constants.MESSAGE_SUCCESS_VIEW,
-                    MessageManager.getProperty(Constants.MESSAGE_DELETING_SUCCESS));
+                    MessageManager.getProperty(Constants.MESSAGE_DELETING_USER_SUCCESS));
         } else {
             request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
-                    MessageManager.getProperty(Constants.MESSAGE_DELETING_ERROR));
+                    MessageManager.getProperty(Constants.MESSAGE_DELETING_USER_ERROR));
         }
         return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_CONTROL_PAGE);
     }

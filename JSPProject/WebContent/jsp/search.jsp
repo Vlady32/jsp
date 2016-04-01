@@ -6,25 +6,60 @@
 		<title>Search page</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/searchStyle.css" media="all">
 		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/search.js"></script>
+		<style type="text/css">
+			form{
+				text-align: center;
+				margin-top: 10px;
+			}
+			input, select{
+				margin-left: 10px;
+				width: 40%;
+    			height: 37px;
+    			padding-left: 10px;
+    			margin-bottom: 5px; 
+    			font-size: 16px; 
+    			border-top: 1px solid #e1e8ec;
+    			border-right: 1px solid #eef2f5;
+    			border-bottom: 1px solid #eef2f5;
+    			border-left: 1px solid #e1e8ec;
+    			border-radius: 4px;
+			}
+			select{
+				width: 20%;
+			}
+			input[type="submit"]{
+				width: 20%;
+				cursor: pointer;
+				color: #185e87;
+				border-width: 1px;
+    			border-style: solid;
+    			border-radius: 4px;
+    			padding-left: 21px;
+    			font-size: 18px;
+    			padding-right: 21px;
+				text-shadow: 1px 1px 0 #c3e9f8;
+				background-color: #94dffc;
+			}
+			input[type="submit"]:hover{
+				background-color: #5ecef9;
+			}
+		</style>
 	</head>
 	<body>
 		${errorDelete}
 		<form id="searchRecords" method="post" action="actionController">
 			<input type="hidden" name="command" value="search">
-			<p>Введите ключевое слово: <input type="text" name="phraseSearch" value="${phraseSearch}"></p>
-			<p>Выберите категорию поиска: 
-				<select name="category">
+			<input type="text" name="phraseSearch" placeholder="Ключевое слово" value="${phraseSearch}">
+			<select name="category">
 					<option value="fullName">Ф.И.О.</option>
 					<option value="address">Адрес</option>
 					<option value="phoneNumber">Телефон</option>
 					<option value="all">Везде</option>
 				</select>
-			</p>
-			<p><input type="submit" value="Искать"></p>
+			<input type="submit" value="Искать">
 		</form>
 		${errorView}
 		<table class="${empty errorView && listRecords.size() > 0 ? 'showTable' : 'hide'}">
-			<caption>Телефонный справочник</caption>
 			<tr>
 				<th>№ п/п</th>
 				<th>Ф.И.О.</th>

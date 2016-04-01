@@ -8,15 +8,16 @@ p{
 	font-size: 16px;
 }
 
-.in{
-	margin-left: 110px;
+.reg{
+	margin-top: 0px;
+	margin-left: 70px;
 	font-size: 20px;
 }
 
-#loginForm {
+#registrationForm {
 	position: absolute; 
     width: 25%; 
-    height: 45%; 
+    height: 48%; 
     left: 49%; 
     top: 49%; 
     margin-left: -14%; 
@@ -32,7 +33,7 @@ p{
 	border-radius: 4px;
 }
 
-#loginForm input{
+#registrationForm input{
     width: 80%;
     height: 37px;
     padding-left: 10px;
@@ -58,12 +59,6 @@ p{
 	background-color: #94dffc;
 }
 
-.registr{
-	color: #049ad1; 
-	text-decoration: underline;
-	cursor: pointer;
-}
-
 #sendButton:hover{
 	background-color: #5ecef9;
 }
@@ -72,5 +67,4 @@ p{
 .errors{
 	color: red;
 }
-
 

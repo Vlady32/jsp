@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	
 	$('#searchRecords').submit(function (e) {
-		console.log($("select").val());
 		e.preventDefault();
 		var data = $(this).serialize();
 		$.ajax({  
@@ -15,13 +14,17 @@ $(document).ready(function(){
 	})
 	
 	$(".items").click(function() {
-		console.log($(this).attr("data-item"));
 		$.ajax({  
 			type: "POST",
 	        url: "actionController", 
 	        data: {command: 'profile', item: $(this).attr("data-item")},
 	        success: function(html){ 
-	        	$("#workplace").html(html);
+	        	//$("#workplace").html(html);
+	        	$.fancybox(html, {
+          			autoSize: true,
+          			openEffect: 'none',
+          			closeEffect: 'none'
+        		});
 	        }
 	    });
 	});

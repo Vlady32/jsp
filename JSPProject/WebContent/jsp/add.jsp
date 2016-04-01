@@ -3,22 +3,21 @@
 <html>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<head>
-		<title>Main page</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/addStyle.css" media="all">
+		<title>Add page</title>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/jsp/js/add.js"></script>
 	</head>
 	<body>
-	<div id="addPage">
-		<h3>${resultAddition}</h3>
-		<form class="${empty resultAddition ? 'show' : 'hide'}" id="sendRecord" method="post" action="actionController">
-			<input type="hidden" name="command" value="add">
-			<p>Ф.И.О. <input type="text" name="fullName" value="" required/></p>
-			<p>Адрес: <input type="text" name="address" value="" required/></p>
-			<p>Телефонный номер: <input type="text" name="phoneNumber" value="" required/></p>
-			<p>Mail: <input type="text" name="mail" value="" /></p>
-			<p>Дата рождения: <input type="date" name="birthDate" value=""/></p>
-			<p>Фото: <input type="file" name="file" value=""/></p>
-			<input type="submit"  id="go" value="Добавить запись">
+	<h3>${resultAddition}</h3>
+	<div id="addPage" class="box ${empty resultAddition ? 'show' : 'hide'}">
+		<form id="sendRecord" method="post" action="actionController">
+			<h3>Добавление записи</h3>
+			<p><input type="text" name="fullName" value="" required placeholder="Ф.И.О." /> <br><span id="errorFullName" class="errors">${checkingFullName}</span></p>
+			<p><input type="text" name="address" value="" required placeholder="Адрес"/><br> <span id="errorAddress" class="errors">${checkingAddress}</span></p>
+			<p><input type="text" name="phoneNumber" value="" required placeholder="Телефонный номер"/><br> <span id="errorPhoneNumber" class="errors">${checkingPhoneNumber}</span></p>
+			<p><input type="text" name="mail" value="" placeholder="Mail" /> <br><span id="errorMail" class="errors">${checkingMail}</span></p>
+			<p>Дата рождения:<br><input type="date" id="birthDate" name="birthDate" value="" required /></p>
+			<p>Фото:<input type="file" name="photo" id="photoFile"  accept="image/jpeg,image/png,image/gif" value=""/> <br><span id="errorFile" class="errors">${checkingResult}</span></p>
+			<input type="submit" id="addRecord" value="Добавить запись"> <span> ${maxSizeError}</span>
 		</form>
 	</div>
 	</body>

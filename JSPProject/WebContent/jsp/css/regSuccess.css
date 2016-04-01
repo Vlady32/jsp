@@ -1,0 +1,37 @@
+body{
+	width: 99%;
+	background-color: #E7EBED;
+}
+
+#success{
+	position: absolute; 
+    width: 30%; 
+    height: 23%; 
+    left: 49%; 
+    top: 49%; 
+    margin-left: -15%; 
+    margin-top: -10%;
+    font-family: "Arial";
+}
+
+.box{
+	background-color: #fff;
+	padding-left: 40px;
+	padding-top: 20px;
+	padding-right: 40px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+}
+
+.redirect{
+
+	text-align: center;
+}
+
+.links{
+	color: #049ad1; 
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+

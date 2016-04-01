@@ -1,7 +1,19 @@
 package by.iba.gomel;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import by.iba.gomel.managers.MessageManager;
 
@@ -10,9 +22,14 @@ import by.iba.gomel.managers.MessageManager;
  * Also this class uses for working with session.
  */
 public class SessionRequest {
-    private final HttpServletRequest request;
-    private String                   command = null;
-    private final HttpSession        session;
+    private final HttpServletRequest  request;
+    private String                    command       = null;
+    private final HttpSession         session;
+    private final Map<String, String> parametersAdd = new HashMap<String, String>();
+
+    public Map<String, String> getParametersAdd() {
+        return parametersAdd;
+    }
 
     /**
      * 
@@ -33,6 +50,9 @@ public class SessionRequest {
     }
 
     public String extractCommand() {
+        if (ServletFileUpload.isMultipartContent(request)) {
+            return getValueParameter(Constants.PARAMETER_COMMAND);
+        }
         if (request.getMethod().equals(Constants.REQUEST_GET)) {
             command = (String) request.getAttribute(Constants.PARAMETER_COMMAND);
             return command;
@@ -61,4 +81,62 @@ public class SessionRequest {
         return false;
     }
 
+    /**
+     * 
+     * @param nameParameter
+     *            name of parameter for extracting from request. Type request: multipart/form-data
+     * @return value of parameter.
+     * @throws UnsupportedEncodingException
+     * @throws FileUploadException
+     */
+    public String getValueParameter(final String nameParameter) {
+        List<FileItem> items = null;
+        String command = null;
+        final DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(Constants.ONE_KILOBYTE_TO_BYTE * Constants.ONE_KILOBYTE_TO_BYTE
+                * Constants.NUMBER_TWO);
+        factory.setRepository(new File(request.getServletContext()
+                .getRealPath(Constants.TYPE_EMPTY) + Constants.TEMPORARY_NAME_FOLDER));
+        final ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setSizeMax(Constants.ONE_KILOBYTE_TO_BYTE * Constants.ONE_KILOBYTE_TO_BYTE
+                * Constants.NUMBER_TWO);
+        try {
+            items = upload.parseRequest(request);
+        } catch (final FileUploadException e) {
+            request.setAttribute(Constants.PARAMETER_MAX_SIZE,
+                    MessageManager.getProperty(Constants.MESSAGE_MAX_SIZE_ERROR));
+            e.printStackTrace();
+        }
+        for (final FileItem item : items) {
+            if (item.isFormField()) {
+                final String name = item.getFieldName();
+                String value = null;
+                try {
+                    value = item.getString(Constants.ENCODING_UTF_8).trim();
+                } catch (final UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                if ((command != null)
+                        && (command.equals(Constants.PATH_VALUE_ADD) || command
+                                .equals(Constants.PATH_EDIT_BD_PROFILE))) {
+                    parametersAdd.put(name, value);
+                }
+                if (name.equals(Constants.PARAMETER_COMMAND)) {
+                    command = value;
+                }
+            } else {
+                final String fileName = item.getName();
+                final String path = Constants.PATH_VALUE_PHOTOS + File.separator
+                        + new Date().getTime() + fileName;
+                parametersAdd.put(Constants.PARAMETER_PATH_FILE, path);
+                final File file = new File(path);
+                try {
+                    item.write(file);
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return command;
+    }
 }
