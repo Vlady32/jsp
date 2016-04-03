@@ -151,4 +151,11 @@ public class Record {
         this.birthDate = birthDate;
     }
 
+    @Override
+    public String toString() {
+        return "Record [item=" + item + ", fullName=" + fullName + ", address=" + address
+                + ", phoneNumber=" + phoneNumber + ", creationDate=" + creationDate + ", mail="
+                + mail + ", birthDate=" + birthDate + ", pathFile=" + pathFile + "]";
+    }
+
 }

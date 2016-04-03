@@ -81,6 +81,7 @@ public class AddCommand implements IActionCommand {
             AddCommand.LOGGER.error(Constants.PARSE_EXCEPTION, e);
         }
         addedRecord.setPathFile(getParameter(request, Constants.PARAMETER_PATH_FILE));
+        System.err.println(addedRecord);
         if (AdditionLogic.addRecord(addedRecord)) {
             request.getRequest().setAttribute(Constants.MESSAGE_RESULT_ADDITION,
                     MessageManager.getProperty(Constants.MESSAGE_ADDITION_SUCCESS));

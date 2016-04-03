@@ -95,7 +95,6 @@ public class SessionRequest {
      */
     public String getMultipartParameters() {
         List<FileItem> items = null;
-        String commandMultipart = null;
         final DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(Constants.ONE_KILOBYTE_TO_BYTE * Constants.ONE_KILOBYTE_TO_BYTE
                 * Constants.NUMBER_TWO);
@@ -120,13 +119,13 @@ public class SessionRequest {
                 } catch (final UnsupportedEncodingException e) {
                     SessionRequest.LOGGER.error(Constants.UNSUPPORTED_ENCODING_EXCEPTION, e);
                 }
-                if ((commandMultipart != null)
-                        && (commandMultipart.equals(Constants.PATH_VALUE_ADD) || commandMultipart
+                if ((command != null)
+                        && (command.equals(Constants.PATH_VALUE_ADD) || command
                                 .equals(Constants.PATH_EDIT_BD_PROFILE))) {
                     parametersAdd.put(name, value);
                 }
                 if (name.equals(Constants.PARAMETER_COMMAND)) {
-                    commandMultipart = value;
+                    command = value;
                 }
             } else {
                 final String fileName = item.getName();
