@@ -1,4 +1,4 @@
-package by.iba.gomel.logicDB;
+package by.iba.gomel.logicdb;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
-import by.iba.gomel.connectionDB.ConnectionDB2;
+import by.iba.gomel.connectiondb.ConnectionDB2;
 
 /**
  * This logic class uses for editing record in db.
@@ -19,6 +19,16 @@ public class EditLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
 
+    private EditLogic() {
+        // private empty constructor.
+    }
+
+    /**
+     * 
+     * @param record
+     *            record for editing.
+     * @return result operation.
+     */
     public static boolean editRecord(final Record record) {
         Statement st = null;
         PreparedStatement pr = null;
@@ -33,7 +43,7 @@ public class EditLogic {
             pr.setString(Constants.INDEX_COLUMN_MAIL_SQL, record.getMail());
             pr.setDate(Constants.INDEX_COLUMN_DATE_SQL, new java.sql.Date(record.getBirthDate()
                     .getTime()));
-            pr.setString(Constants.INDEX_COLUMN_IMAGE__SQL, record.getPathFile());
+            pr.setString(Constants.INDEX_COLUMN_IMAGE_SQL, record.getPathFile());
             pr.setInt(Constants.INDEX_COLUMN_ITEM_SQL, record.getItem());
             pr.executeUpdate();
         } catch (final SQLException e) {
@@ -44,21 +54,21 @@ public class EditLogic {
                 try {
                     cn.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    EditLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (st != null) {
                 try {
                     st.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    EditLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (pr != null) {
                 try {
                     pr.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    EditLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
         }

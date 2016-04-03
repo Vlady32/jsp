@@ -12,7 +12,7 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.EditLogic;
+import by.iba.gomel.logicdb.EditLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 

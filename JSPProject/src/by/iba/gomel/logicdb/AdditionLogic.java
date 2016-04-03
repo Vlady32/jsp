@@ -1,4 +1,4 @@
-package by.iba.gomel.logicDB;
+package by.iba.gomel.logicdb;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
-import by.iba.gomel.connectionDB.ConnectionDB2;
+import by.iba.gomel.connectiondb.ConnectionDB2;
 
 /**
  * This logic class uses for adding record to db.
@@ -18,6 +18,10 @@ import by.iba.gomel.connectionDB.ConnectionDB2;
 public class AdditionLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
+
+    private AdditionLogic() {
+        // private empty constructor.
+    }
 
     public static boolean addRecord(final Record record) {
         Statement st = null;
@@ -43,21 +47,21 @@ public class AdditionLogic {
                 try {
                     cn.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    AdditionLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (st != null) {
                 try {
                     st.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    AdditionLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (pr != null) {
                 try {
                     pr.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    AdditionLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
         }

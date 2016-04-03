@@ -12,7 +12,7 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.AdditionLogic;
+import by.iba.gomel.logicdb.AdditionLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
@@ -77,7 +77,6 @@ public class AddCommand implements IActionCommand {
         try {
             addedRecord.setBirthDate(format.parse(getParameter(request,
                     Constants.PARAMETER_BIRTH_DATE)));
-
         } catch (final ParseException e) {
             AddCommand.LOGGER.error(Constants.PARSE_EXCEPTION, e);
         }

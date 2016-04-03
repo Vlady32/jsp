@@ -20,7 +20,7 @@ public class ProfileCommand implements IActionCommand {
         if (request.isUser()) {
             return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_LOGIN_PAGE);
         }
-        String page = null;
+        String page;
         final int item = Integer.parseInt(request.getRequest().getParameter(
                 Constants.PARAMETER_ITEM));
         final List<Record> listRecords = Record.getListRecords();

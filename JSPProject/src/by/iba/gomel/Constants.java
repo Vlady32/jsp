@@ -18,7 +18,6 @@ public class Constants {
     public static final int    INDEX_COLUMN_DATE_SQL                             = 5;
     public static final int    INDEX_COLUMN_CREATION_DATE_VIEW_SQL               = 5;
     public static final int    INDEX_COLUMN_IMAGE_SQL                            = 6;
-    public static final int    INDEX_COLUMN_IMAGE__SQL                           = 6;
     public static final int    INDEX_COLUMN_MAIL_VIEW_SQL                        = 6;
     public static final int    INDEX_COLUMN_BIRTHDATE_VIEW_SQL                   = 7;
     public static final int    INDEX_COLUMN_ITEM_SQL                             = 7;
@@ -104,6 +103,12 @@ public class Constants {
     public static final String EXCEPTION_DUPLICATE_LOGIN                         = "DuplicateLoginException";
     public static final String PARSE_EXCEPTION                                   = "ParseException";
     public static final String NAMING_EXCEPTION                                  = "NamingException";
+    public static final String IO_EXCEPTION                                      = "IOException";
+    public static final String EXCEPTION                                         = "Exception";
+    public static final String FILE_UPLOAD_EXCEPTION                             = "FileUploadException";
+    public static final String UNSUPPORTED_ENCODING_EXCEPTION                    = "UnsupportedEncodingException";
+    public static final String VIEW_EXCEPTION                                    = "ViewException";
+    public static final String ILLEGAL_ARGUMENT_EXCEPTION                        = "IllegalArgumentException";
 
     public static final String PROPERTY_PATH_INDEX_PAGE                          = "path.page.index";
     public static final String PROPERTY_PATH_MAIN_PAGE                           = "path.page.main";
@@ -162,4 +167,8 @@ public class Constants {
     public static final String REG_ADDRESS                                       = "^[ \\wа-яА-ЯёЁ\\.\\,\\-]*$";
     public static final String REG_PHONE_NUMBER                                  = "^\\+?\\d+$";
     public static final String REG_MAIL                                          = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private Constants() {
+        // Empty constructor.
+    }
 }

@@ -9,11 +9,11 @@ import by.iba.gomel.Constants;
  * 'messages'.
  */
 public class MessageManager {
-    private final static ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
                                                                 .getBundle(Constants.FILE_MESSAGES_PROPERTY);
 
     private MessageManager() {
-
+        // private empty constructor.
     }
 
     public static String getProperty(final String key) {

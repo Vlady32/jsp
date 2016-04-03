@@ -2,8 +2,12 @@ package by.iba.gomel;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ibm.ws.util.Base64;
 
@@ -12,6 +16,7 @@ import com.ibm.ws.util.Base64;
  */
 public class Record {
 
+    private static final Logger LOGGER       = LoggerFactory.getLogger(Record.class);
     private int                 item         = Constants.DEFAULT_INDEX_ITEM;
     private String              fullName     = null;
     private String              address      = null;
@@ -20,44 +25,10 @@ public class Record {
     private String              mail         = null;
     private Date                birthDate    = null;
     private String              pathFile     = null;
-
     private static List<Record> listRecords;
 
-    public static List<Record> getListRecords() {
-        return Record.listRecords;
-    }
-
-    private byte[] getByteFile(final String pathToFile) {
-        FileInputStream fileInputStream = null;
-        final File file = new File(pathToFile);
-        final byte[] bFile = new byte[(int) file.length()];
-        try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bFile);
-            fileInputStream.close();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-        return bFile;
-    }
-
-    public String getBase64Code() {
-        return Base64.encode(getByteFile(pathFile));
-    }
-
-    public static void setListRecords(final List<Record> listRecords) {
-        Record.listRecords = listRecords;
-    }
-
-    public String getPathFile() {
-        return pathFile;
-    }
-
-    public void setPathFile(final String pathFile) {
-        this.pathFile = pathFile;
-    }
-
     public Record() {
+        // Empty constructor.
     }
 
     /**
@@ -87,6 +58,40 @@ public class Record {
         this.creationDate = creationDate;
         this.mail = mail;
         this.birthDate = birthDate;
+        this.pathFile = pathFile;
+    }
+
+    public static List<Record> getListRecords() {
+        return Record.listRecords;
+    }
+
+    private byte[] getByteFile(final String pathToFile) {
+        FileInputStream fileInputStream = null;
+        final File file = new File(pathToFile);
+        final byte[] bFile = new byte[(int) file.length()];
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        } catch (final IOException e) {
+            Record.LOGGER.error(Constants.IO_EXCEPTION, e);
+        }
+        return bFile;
+    }
+
+    public String getBase64Code() {
+        return Base64.encode(getByteFile(pathFile));
+    }
+
+    public static void setListRecords(final List<Record> listRecords) {
+        Record.listRecords = listRecords;
+    }
+
+    public String getPathFile() {
+        return pathFile;
+    }
+
+    public void setPathFile(final String pathFile) {
         this.pathFile = pathFile;
     }
 

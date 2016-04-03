@@ -3,7 +3,7 @@ package by.iba.gomel.commands;
 import by.iba.gomel.Constants;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.LoginLogic;
+import by.iba.gomel.logicdb.LoginLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
@@ -15,7 +15,7 @@ public class LoginCommand implements IActionCommand {
 
     @Override
     public String execute(final SessionRequest request) {
-        String page = null;
+        String page;
         final String login = request.getRequest().getParameter(Constants.PARAMETER_NAME_LOGIN);
         final String password = request.getRequest()
                 .getParameter(Constants.PARAMETER_NAME_PASSWORD);

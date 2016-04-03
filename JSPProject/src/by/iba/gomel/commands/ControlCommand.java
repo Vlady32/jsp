@@ -2,12 +2,15 @@ package by.iba.gomel.commands;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import by.iba.gomel.Constants;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.User;
 import by.iba.gomel.exceptions.ViewException;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.ControlLogic;
+import by.iba.gomel.logicdb.ControlLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
@@ -16,6 +19,8 @@ import by.iba.gomel.managers.MessageManager;
  * working with users.
  */
 public class ControlCommand implements IActionCommand {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ControlCommand.class);
 
     @Override
     public String execute(final SessionRequest request) {
@@ -35,6 +40,7 @@ public class ControlCommand implements IActionCommand {
         } catch (final ViewException e) {
             request.getRequest().setAttribute(Constants.MESSAGE_ERROR_VIEW,
                     MessageManager.getProperty(Constants.MESSAGE_WRONG_VIEW));
+            ControlCommand.LOGGER.error(Constants.VIEW_EXCEPTION, e);
         }
         return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_CONTROL_PAGE);
     }

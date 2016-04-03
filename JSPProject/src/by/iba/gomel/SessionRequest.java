@@ -14,6 +14,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.managers.MessageManager;
 
@@ -22,14 +24,12 @@ import by.iba.gomel.managers.MessageManager;
  * Also this class uses for working with session.
  */
 public class SessionRequest {
+
+    private static final Logger       LOGGER        = LoggerFactory.getLogger(SessionRequest.class);
     private final HttpServletRequest  request;
     private String                    command       = null;
     private final HttpSession         session;
     private final Map<String, String> parametersAdd = new HashMap<String, String>();
-
-    public Map<String, String> getParametersAdd() {
-        return parametersAdd;
-    }
 
     /**
      * 
@@ -39,6 +39,10 @@ public class SessionRequest {
     public SessionRequest(final HttpServletRequest request) {
         this.request = request;
         session = request.getSession();
+    }
+
+    public Map<String, String> getParametersAdd() {
+        return parametersAdd;
     }
 
     public HttpSession getSession() {
@@ -51,7 +55,7 @@ public class SessionRequest {
 
     public String extractCommand() {
         if (ServletFileUpload.isMultipartContent(request)) {
-            return getValueParameter(Constants.PARAMETER_COMMAND);
+            return getMultipartParameters();
         }
         if (request.getMethod().equals(Constants.REQUEST_GET)) {
             command = (String) request.getAttribute(Constants.PARAMETER_COMMAND);
@@ -89,9 +93,9 @@ public class SessionRequest {
      * @throws UnsupportedEncodingException
      * @throws FileUploadException
      */
-    public String getValueParameter(final String nameParameter) {
+    public String getMultipartParameters() {
         List<FileItem> items = null;
-        String command = null;
+        String commandMultipart = null;
         final DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(Constants.ONE_KILOBYTE_TO_BYTE * Constants.ONE_KILOBYTE_TO_BYTE
                 * Constants.NUMBER_TWO);
@@ -105,7 +109,7 @@ public class SessionRequest {
         } catch (final FileUploadException e) {
             request.setAttribute(Constants.PARAMETER_MAX_SIZE,
                     MessageManager.getProperty(Constants.MESSAGE_MAX_SIZE_ERROR));
-            e.printStackTrace();
+            SessionRequest.LOGGER.error(Constants.FILE_UPLOAD_EXCEPTION, e);
         }
         for (final FileItem item : items) {
             if (item.isFormField()) {
@@ -114,15 +118,15 @@ public class SessionRequest {
                 try {
                     value = item.getString(Constants.ENCODING_UTF_8).trim();
                 } catch (final UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    SessionRequest.LOGGER.error(Constants.UNSUPPORTED_ENCODING_EXCEPTION, e);
                 }
-                if ((command != null)
-                        && (command.equals(Constants.PATH_VALUE_ADD) || command
+                if ((commandMultipart != null)
+                        && (commandMultipart.equals(Constants.PATH_VALUE_ADD) || commandMultipart
                                 .equals(Constants.PATH_EDIT_BD_PROFILE))) {
                     parametersAdd.put(name, value);
                 }
                 if (name.equals(Constants.PARAMETER_COMMAND)) {
-                    command = value;
+                    commandMultipart = value;
                 }
             } else {
                 final String fileName = item.getName();
@@ -133,8 +137,9 @@ public class SessionRequest {
                 try {
                     item.write(file);
                 } catch (final Exception e) {
-                    e.printStackTrace();
+                    SessionRequest.LOGGER.error(Constants.EXCEPTION, e);
                 }
+
             }
         }
         return command;

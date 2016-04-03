@@ -1,4 +1,4 @@
-package by.iba.gomel.logicDB;
+package by.iba.gomel.logicdb;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.Constants;
-import by.iba.gomel.connectionDB.ConnectionDB2;
+import by.iba.gomel.connectiondb.ConnectionDB2;
 
 /**
  * This class contains method checkUser that to check login and password according to database.
@@ -17,6 +17,18 @@ import by.iba.gomel.connectionDB.ConnectionDB2;
 public class LoginLogic {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginLogic.class);
 
+    private LoginLogic() {
+        // empty private constructor.
+    }
+
+    /**
+     * 
+     * @param enterLogin
+     *            login.
+     * @param enterPassword
+     *            password.
+     * @return result operation.
+     */
     public static String checkUser(final String enterLogin, final String enterPassword) {
         Statement st = null;
         ResultSet rs = null;
@@ -39,21 +51,21 @@ public class LoginLogic {
                 try {
                     cn.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    LoginLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (st != null) {
                 try {
                     st.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    LoginLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (rs != null) {
                 try {
                     rs.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    LoginLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
         }

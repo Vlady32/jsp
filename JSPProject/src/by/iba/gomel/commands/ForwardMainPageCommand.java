@@ -20,8 +20,7 @@ public class ForwardMainPageCommand implements IActionCommand {
                 session.getAttribute(Constants.ATTRIBUTE_NAME_LOGIN));
         request.getRequest().setAttribute(Constants.ATTRIBUTE_NAME_TYPE,
                 session.getAttribute(Constants.ATTRIBUTE_NAME_TYPE));
-        final String page = ConfigurationManager.getProperty(Constants.PROPERTY_PATH_MAIN_PAGE);
-        return page;
+        return ConfigurationManager.getProperty(Constants.PROPERTY_PATH_MAIN_PAGE);
     }
 
 }

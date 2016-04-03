@@ -50,7 +50,7 @@ public class ActionController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding(Constants.ENCODING_UTF_8);
         final SessionRequest requestContent = new SessionRequest(request);
-        String page = null;
+        String page;
         final ActionFactory client = new ActionFactory();
         final IActionCommand command = client.defineCommand(requestContent);
         page = command.execute(requestContent);

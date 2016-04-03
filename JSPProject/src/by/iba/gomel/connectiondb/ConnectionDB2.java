@@ -1,4 +1,4 @@
-package by.iba.gomel.connectionDB;
+package by.iba.gomel.connectiondb;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,6 +19,10 @@ import by.iba.gomel.Constants;
 public class ConnectionDB2 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionDB2.class);
+
+    private ConnectionDB2() {
+        // empty constructor.
+    }
 
     /**
      * 

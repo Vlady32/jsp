@@ -1,4 +1,4 @@
-package by.iba.gomel.logicDB;
+package by.iba.gomel.logicdb;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,56 +9,62 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.Constants;
-import by.iba.gomel.connectionDB.ConnectionDB2;
-import by.iba.gomel.exceptions.DuplicateLoginException;
+import by.iba.gomel.connectiondb.ConnectionDB2;
 
 /**
- * This logic class uses for registration user in db.
+ * This logic class uses for deleting record from db.
  */
-public class RegistrationLogic {
+public class DeleteRecordLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationLogic.class);
 
-    public static void AddToDB(final String userName, final String password, final String type)
-            throws DuplicateLoginException {
+    private DeleteRecordLogic() {
+        // private empty constructor.
+    }
+
+    /**
+     * 
+     * @param item
+     *            id element.
+     * @return result.
+     */
+    public static boolean deleteRecord(final int item) {
         Statement st = null;
         PreparedStatement pr = null;
         Connection cn = null;
-
         try {
             cn = ConnectionDB2.getConnection();
             st = cn.createStatement();
-            pr = cn.prepareStatement(Constants.REQUEST_DB_REGISTRATION_USER);
-            pr.setString(Constants.INDEX_COLUMN_FULLNAME_SQL, userName);
-            pr.setString(Constants.INDEX_COLUMN_PASSWORD_SQL, password);
-            pr.setString(Constants.INDEX_COLUMN_TYPE_USER_SQL, type);
+            pr = cn.prepareStatement(Constants.REQUEST_DB_DELETE_RECORD);
+            pr.setInt(Constants.INDEX_COLUMN_FULLNAME_SQL, item);
             pr.executeUpdate();
         } catch (final SQLException e) {
-            RegistrationLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
-            throw new DuplicateLoginException(userName, e);
+            DeleteRecordLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
+            return false;
         } finally {
             if (cn != null) {
                 try {
                     cn.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    DeleteRecordLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (st != null) {
                 try {
                     st.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    DeleteRecordLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (pr != null) {
                 try {
                     pr.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    DeleteRecordLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
         }
+        return true;
     }
 
 }

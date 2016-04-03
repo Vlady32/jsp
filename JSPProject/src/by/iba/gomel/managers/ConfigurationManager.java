@@ -8,11 +8,11 @@ import by.iba.gomel.Constants;
  * This service class contains method getProperty that gets information from property file 'config'.
  */
 public class ConfigurationManager {
-    private final static ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
                                                                 .getBundle(Constants.FILE_CONFIG_PROPERTY);
 
     private ConfigurationManager() {
-
+        // empty private constructor.
     }
 
     public static String getProperty(final String key) {

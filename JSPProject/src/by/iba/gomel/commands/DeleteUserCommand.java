@@ -3,7 +3,7 @@ package by.iba.gomel.commands;
 import by.iba.gomel.Constants;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.DeleteUserLogic;
+import by.iba.gomel.logicdb.DeleteUserLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 

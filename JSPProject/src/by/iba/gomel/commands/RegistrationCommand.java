@@ -10,7 +10,7 @@ import by.iba.gomel.Constants;
 import by.iba.gomel.SessionRequest;
 import by.iba.gomel.exceptions.DuplicateLoginException;
 import by.iba.gomel.interfaces.IActionCommand;
-import by.iba.gomel.logicDB.RegistrationLogic;
+import by.iba.gomel.logicdb.RegistrationLogic;
 import by.iba.gomel.managers.ConfigurationManager;
 import by.iba.gomel.managers.MessageManager;
 
@@ -24,7 +24,7 @@ public class RegistrationCommand implements IActionCommand {
 
     @Override
     public String execute(final SessionRequest request) {
-        String page = null;
+        String page;
         final String login = request.getRequest().getParameter(Constants.PARAMETER_NAME_LOGIN);
         if (!checkLogin(login)) {
             request.getRequest().setAttribute(
@@ -40,7 +40,7 @@ public class RegistrationCommand implements IActionCommand {
         final String typeUser = Constants.TYPE_USER;
         if (password.equals(confirmedPassword)) {
             try {
-                RegistrationLogic.AddToDB(login, password, typeUser);
+                RegistrationLogic.addToDB(login, password, typeUser);
                 page = ConfigurationManager
                         .getProperty(Constants.PROPERTY_PATH_REGISTRATION_SUCCESSFUL_PAGE);
             } catch (final DuplicateLoginException e) {

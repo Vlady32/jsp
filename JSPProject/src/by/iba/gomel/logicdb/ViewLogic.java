@@ -1,4 +1,4 @@
-package by.iba.gomel.logicDB;
+package by.iba.gomel.logicdb;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,18 +12,31 @@ import org.slf4j.LoggerFactory;
 
 import by.iba.gomel.Constants;
 import by.iba.gomel.Record;
-import by.iba.gomel.connectionDB.ConnectionDB2;
+import by.iba.gomel.connectiondb.ConnectionDB2;
 import by.iba.gomel.exceptions.ViewException;
 
 /**
- * This logic class uses for searching record from db.
+ * This class contains method extract that extracts data from database.
  */
-public class SearchLogic {
+public class ViewLogic {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginLogic.class);
+    private static int          qualityRecords;
+    private static List<Record> listRecords;
 
-    public static List<Record> extract(final String searchPhrase, final String category)
-            throws ViewException {
+    private ViewLogic() {
+        // private empty constructor.
+    }
+
+    /**
+     * 
+     * @param start
+     *            position.
+     * @return list of records.
+     * @throws ViewException
+     *             exception database.
+     */
+    public static List<Record> extract(final int start) throws ViewException {
         Statement st = null;
         ResultSet rs = null;
         Connection cn = null;
@@ -32,23 +45,15 @@ public class SearchLogic {
             cn = ConnectionDB2.getConnection();
             listRecords = new ArrayList<Record>();
             st = cn.createStatement();
-            final String getRecordsAll = Constants.REQUEST_DB_GET_RECORDS_ALL_COLUMNS_FIRST_PART
-                    + searchPhrase.toLowerCase()
-                    + Constants.REQUEST_DB_GET_RECORDS_ALL_COLUMNS_SECOND_PART
-                    + searchPhrase.toLowerCase()
-                    + Constants.REQUEST_DB_GET_RECORDS_ALL_COLUMNS_THIRD_PART
-                    + searchPhrase.toLowerCase()
-                    + Constants.REQUEST_DB_GET_RECORDS_ALL_COLUMNS_FOURTH_PART;
-            final String getRecordsCertainColumn = Constants.REQUEST_DB_GET_RECORDS_CERTAIN_COLUMN_FIRST_PART
-                    + category
-                    + Constants.REQUEST_DB_GET_RECORDS_CERTAIN_COLUMN_SECOND_PART
-                    + searchPhrase.toLowerCase()
-                    + Constants.REQUEST_DB_GET_RECORDS_CERTAIN_COLUMN_THIRD_PART;
-            if (category.equals(Constants.PARAMETER_ALL)) {
-                rs = st.executeQuery(getRecordsAll);
-            } else {
-                rs = st.executeQuery(getRecordsCertainColumn);
+            final String getAllRecordsRequest = Constants.REQUEST_DB_GET_ALL_RECORDS_FIRST_PART
+                    + start + Constants.REQUEST_DB_GET_ALL_RECORDS_SECOND_PART;
+            final String qualityRequest = Constants.REQUEST_DB_QUALITY_RECORDS;
+            rs = st.executeQuery(qualityRequest);
+            if (rs.next()) {
+                ViewLogic.qualityRecords = rs.getInt(Constants.INDEX_COLUMN_FULLNAME_SQL);
             }
+            rs.close();
+            rs = st.executeQuery(getAllRecordsRequest);
             while (rs.next()) {
                 listRecords.add(new Record(rs.getInt(Constants.INDEX_COLUMN_ITEM_VIEW_SQL), rs
                         .getString(Constants.INDEX_COLUMN_FULLNAME_VIEW_SQL), rs
@@ -59,33 +64,45 @@ public class SearchLogic {
                         .getDate(Constants.INDEX_COLUMN_BIRTHDATE_VIEW_SQL), rs
                         .getString(Constants.INDEX_COLUMN_IMAGE_VIEW_SQL)));
             }
+            Record.setListRecords(listRecords);
         } catch (final SQLException e) {
-            SearchLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
+            ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
             throw new ViewException(e);
         } finally {
             if (cn != null) {
                 try {
                     cn.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (st != null) {
                 try {
                     st.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
             if (rs != null) {
                 try {
                     rs.close();
                 } catch (final SQLException e) {
-                    e.printStackTrace();
+                    ViewLogic.LOGGER.error(Constants.EXCEPTION_SQL, e);
                 }
             }
         }
         return listRecords;
     }
 
+    public static int getQualityRecords() {
+        return ViewLogic.qualityRecords;
+    }
+
+    public static List<Record> getListRecords() {
+        return ViewLogic.listRecords;
+    }
+
+    public static void setListRecords(final List<Record> listRecords) {
+        ViewLogic.listRecords = listRecords;
+    }
 }
